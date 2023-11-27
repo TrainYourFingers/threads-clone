@@ -1,5 +1,3 @@
-import { Dispatch } from "react";
-
 export interface Thread {
   id: string;
   author: User;

@@ -9,6 +9,7 @@ import { View as NormalView } from "react-native";
 import React from "react";
 import { router } from "expo-router";
 import { Thread } from "../types/threads";
+import { Image } from "expo-image";
 
 const Message = (user: Thread) => {
   const currentColor = useColorScheme();
@@ -38,7 +39,12 @@ const Message = (user: Thread) => {
           width: 80,
           borderRadius: 999,
         }}
-      ></View>
+      >
+        <Image
+          source={user.author.photo}
+          style={{ height: "100%", borderRadius: 999 }}
+        />
+      </View>
       <NormalView style={{ flex: 1, paddingLeft: 20 }}>
         <View
           style={{
@@ -47,13 +53,14 @@ const Message = (user: Thread) => {
             backgroundColor: "transparent",
           }}
         >
-          <Text style={{ fontWeight: "500", fontSize: 16 }}>Name Lastname</Text>
+          <Text style={{ fontWeight: "500", fontSize: 16 }}>
+            {user.author.name}
+          </Text>
           <Text style={{ color: "gray" }}>12:30 PM</Text>
         </View>
         <View style={{ backgroundColor: "transparent" }}>
           <Text style={{ fontSize: 12, color: "gray" }}>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati,
-            corporis!
+            {user.content.slice(0, 80)}
           </Text>
         </View>
       </NormalView>

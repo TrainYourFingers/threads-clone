@@ -18,17 +18,15 @@ const SearchResult = (user: Thread) => {
         router.push(`/searched/${user.id}`);
       }}
       // className="border-b-[0.5px] border-neutral-600 px-4 py-4"
-      style={({ pressed }) => [
-        {
-          padding: 20,
-          borderBottomWidth: 0.5,
-          // backgroundColor: pressed ? "#222" : "transparent",
-          borderColor: borderColor,
-          flex: 1,
-          flexDirection: "row",
-          alignItems: "center",
-        },
-      ]}
+      style={{
+        padding: 20,
+        borderBottomWidth: 0.5,
+        // backgroundColor: pressed ? "#222" : "transparent",
+        borderColor: borderColor,
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+      }}
       android_ripple={{ color: "#bbb" }}
     >
       {user.author.photo && (
@@ -53,3 +51,7 @@ const SearchResult = (user: Thread) => {
 };
 
 export default SearchResult;
+
+
+
+
