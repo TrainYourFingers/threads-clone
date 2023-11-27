@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Pressable, StyleSheet, useColorScheme } from "react-native";
 import { Text, View } from "../../components/Themed";
 import React, { useContext } from "react";
 import { ThreadsContext, ThreadsProvider } from "../../context/thread-context";
@@ -11,6 +11,7 @@ import { FontAwesome, Ionicons } from "@expo/vector-icons";
 const ChatPage = () => {
   const users = useContext(ThreadsContext);
   const { chatID } = useLocalSearchParams();
+  const currentColor = useColorScheme();
 
   const oneUser = users.find((item) => item.id === chatID);
 
@@ -23,7 +24,7 @@ const ChatPage = () => {
           headerTitleAlign: "center",
           headerShown: true,
           headerTitle: () => (
-            <View
+            <NormalView
               style={{
                 justifyContent: "center",
                 alignItems: "center",
@@ -42,10 +43,12 @@ const ChatPage = () => {
                   style={{ height: "100%", borderRadius: 999 }}
                 />
               </View>
-              <Text style={{ fontSize: 12, fontWeight: "400", paddingTop: 3 }}>
+              <Text
+                style={{ fontSize: 12, fontWeight: "400", paddingVertical: 5 }}
+              >
                 {oneUser?.author.name}
               </Text>
-            </View>
+            </NormalView>
           ),
         }}
       />
@@ -79,12 +82,14 @@ const ChatPage = () => {
               paddingVertical: 3,
               fontSize: 16,
               flex: 1,
+              color: currentColor === "dark" ? "white" : "black",
             }}
             placeholder="Message . . ."
+            placeholderTextColor="gray"
           />
-          <NormalView
+          <Pressable
             style={{
-              backgroundColor: "black",
+              backgroundColor: currentColor === "dark" ? "white" : "black",
               height: 38,
               width: 38,
               borderRadius: 999,
@@ -93,8 +98,12 @@ const ChatPage = () => {
               alignItems: "center",
             }}
           >
-            <FontAwesome name="send" size={20} color="white" />
-          </NormalView>
+            <FontAwesome
+              name="send"
+              size={20}
+              color={currentColor === "dark" ? "black" : "white"}
+            />
+          </Pressable>
         </NormalView>
       </NormalView>
     </NormalView>

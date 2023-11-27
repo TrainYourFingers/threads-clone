@@ -10,9 +10,9 @@ import { Link, router } from "expo-router";
 
 const search = () => {
   const users = useContext(ThreadsContext);
+  const [borderColor, setBorderColor] = useState("#bebebe");
 
   const currentTheme = useColorScheme();
-  const borderColor = "#2e2e2e";
   const textColor = currentTheme === "dark" ? "#d6d6d6" : "#2e2e2e";
 
   const [search, setSearch] = useState<string>("");
@@ -35,6 +35,8 @@ const search = () => {
           onChangeText={(text) => handleSearch(text)}
           placeholder="Search..."
           placeholderTextColor="#8e8e8e"
+          onFocus={() => setBorderColor("#555")}
+          onBlur={() => setBorderColor("#bebebe")}
           className="text-xl rounded-full px-4 py-2"
           style={{
             borderColor: borderColor,
