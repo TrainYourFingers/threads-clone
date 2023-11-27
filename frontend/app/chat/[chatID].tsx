@@ -4,7 +4,9 @@ import React, { useContext } from "react";
 import { ThreadsContext, ThreadsProvider } from "../../context/thread-context";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View as NormalView } from "react-native";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
 const ChatPage = () => {
   const users = useContext(ThreadsContext);
@@ -14,7 +16,7 @@ const ChatPage = () => {
 
   return (
     // <ThreadsProvider>
-    <SafeAreaView>
+    <NormalView>
       <Stack.Screen
         options={{
           animation: "slide_from_right",
@@ -25,12 +27,13 @@ const ChatPage = () => {
               style={{
                 justifyContent: "center",
                 alignItems: "center",
+                paddingTop: 20,
               }}
             >
               <View
                 style={{
-                  height: 30,
-                  width: 30,
+                  height: 40,
+                  width: 40,
                   borderRadius: 999,
                 }}
               >
@@ -39,15 +42,62 @@ const ChatPage = () => {
                   style={{ height: "100%", borderRadius: 999 }}
                 />
               </View>
-              <Text style={{ fontSize: 14, fontWeight: "500" }}>
+              <Text style={{ fontSize: 12, fontWeight: "400", paddingTop: 3 }}>
                 {oneUser?.author.name}
               </Text>
             </View>
           ),
         }}
       />
-    </SafeAreaView>
-    // </ThreadsProvider>
+      <NormalView style={{ display: "flex", height: "100%" }}>
+        <ScrollView style={{ paddingHorizontal: 10, flex: 1 }}>
+          <NormalView>
+            <Text style={{ textAlign: "right", fontSize: 16 }}>Hello</Text>
+          </NormalView>
+          <NormalView>
+            <Text style={{ textAlign: "left", fontSize: 16 }}>
+              How Are you?
+            </Text>
+          </NormalView>
+        </ScrollView>
+        <NormalView
+          style={{
+            height: 40,
+            paddingHorizontal: 10,
+            marginBottom: 20,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <TextInput
+            style={{
+              borderWidth: 0.5,
+              borderColor: "#999",
+              borderRadius: 999,
+              paddingHorizontal: 10,
+              paddingVertical: 3,
+              fontSize: 16,
+              flex: 1,
+            }}
+            placeholder="Message . . ."
+          />
+          <NormalView
+            style={{
+              backgroundColor: "black",
+              height: 38,
+              width: 38,
+              borderRadius: 999,
+              marginLeft: 5,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <FontAwesome name="send" size={20} color="white" />
+          </NormalView>
+        </NormalView>
+      </NormalView>
+    </NormalView>
   );
 };
 
