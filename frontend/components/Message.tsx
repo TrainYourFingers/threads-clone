@@ -60,7 +60,7 @@ const Message = (user: Thread) => {
         </View>
         <View style={{ backgroundColor: "transparent" }}>
           <Text style={{ fontSize: 12, color: "gray" }}>
-            {user.content.slice(0, 80)}
+            {user.content.slice(0, 50)}
           </Text>
         </View>
       </NormalView>

@@ -1,4 +1,10 @@
-import { Platform, Pressable, StyleSheet, useColorScheme } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  StyleSheet,
+  useColorScheme,
+} from "react-native";
 import { Text, View } from "../../components/Themed";
 import React, { useContext } from "react";
 import { ThreadsContext, ThreadsProvider } from "../../context/thread-context";
@@ -88,21 +94,25 @@ const ChatPage = () => {
           ),
         }}
       />
-      <NormalView style={{ display: "flex", height: "100%" }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        style={{ display: "flex", height: "100%" }}
+      >
         <ScrollView style={{ paddingHorizontal: 10, flex: 1 }}>
           <NormalView
             style={{
               paddingVertical: 5,
               display: "flex",
               flexDirection: "row",
+              justifyContent: "flex-end",
             }}
           >
-            <Text style={{ flex: 1 }}></Text>
             <NormalView
               style={{
-                backgroundColor: "#222",
+                backgroundColor: "#0091ff",
                 padding: 10,
-                borderRadius: 999,
+                borderRadius: 20,
+                maxWidth: 350,
               }}
             >
               <Text
@@ -111,7 +121,8 @@ const ChatPage = () => {
                   fontSize: 16,
                 }}
               >
-                Hello
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
+                impedi
               </Text>
             </NormalView>
           </NormalView>
@@ -124,9 +135,10 @@ const ChatPage = () => {
           >
             <NormalView
               style={{
-                backgroundColor: "#0091ff",
+                backgroundColor: "#222",
                 padding: 10,
-                borderRadius: 999,
+                borderRadius: 20,
+                maxWidth: 350,
               }}
             >
               <Text
@@ -135,10 +147,10 @@ const ChatPage = () => {
                   fontSize: 16,
                 }}
               >
-                How Are you?
+                How Are you? Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Libero, cupiditate.
               </Text>
             </NormalView>
-            <Text style={{ flex: 1 }}></Text>
           </NormalView>
         </ScrollView>
         <NormalView
@@ -185,7 +197,7 @@ const ChatPage = () => {
             />
           </Pressable>
         </NormalView>
-      </NormalView>
+      </KeyboardAvoidingView>
     </NormalView>
   );
 };
