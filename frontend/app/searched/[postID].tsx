@@ -2,7 +2,7 @@ import { useColorScheme } from "react-native";
 import React, { useContext } from "react";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { ThreadsContext, ThreadsProvider } from "../../context/thread-context";
-import { FontAwesome, AntDesign } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { View, Text } from "../../components/Themed";
 

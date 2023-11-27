@@ -1,12 +1,19 @@
-import { Pressable, StyleSheet, useColorScheme } from "react-native";
+import { Platform, Pressable, StyleSheet, useColorScheme } from "react-native";
 import { Text, View } from "../../components/Themed";
 import React, { useContext } from "react";
 import { ThreadsContext, ThreadsProvider } from "../../context/thread-context";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack, router, useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import { View as NormalView } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  Ionicons,
+  AntDesign,
+  MaterialIcons,
+  Feather,
+} from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const ChatPage = () => {
   const users = useContext(ThreadsContext);
@@ -23,59 +30,132 @@ const ChatPage = () => {
           animation: "slide_from_right",
           headerTitleAlign: "center",
           headerShown: true,
-          headerTitle: () => (
-            <NormalView
+          header: () => (
+            <SafeAreaView
               style={{
-                justifyContent: "center",
+                flexDirection: "row",
+                justifyContent: "space-between",
                 alignItems: "center",
                 paddingTop: 20,
+                backgroundColor: currentColor === "dark" ? "#222" : "#fff",
               }}
             >
-              <View
-                style={{
-                  height: 40,
-                  width: 40,
-                  borderRadius: 999,
-                }}
+              <Pressable onPress={router.back}>
+                {Platform.OS === "android" ? (
+                  <AntDesign
+                    name="arrowleft"
+                    size={24}
+                    style={{ paddingLeft: 10 }}
+                    color={currentColor === "dark" ? "white" : "black"}
+                  />
+                ) : (
+                  <Feather name="chevron-left" size={32} color="#0091ff" />
+                )}
+              </Pressable>
+              <NormalView
+                style={{ justifyContent: "center", alignItems: "center" }}
               >
-                <Image
-                  source={oneUser?.author.photo}
-                  style={{ height: "100%", borderRadius: 999 }}
+                <View
+                  style={{
+                    height: 40,
+                    width: 40,
+                    borderRadius: 999,
+                  }}
+                >
+                  <Image
+                    source={oneUser?.author.photo}
+                    style={{ height: "100%", borderRadius: 999 }}
+                  />
+                </View>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "400",
+                    paddingVertical: 5,
+                  }}
+                >
+                  {oneUser?.author.name}
+                </Text>
+              </NormalView>
+              <Pressable style={{ paddingRight: 10 }}>
+                <Ionicons
+                  name="videocam"
+                  size={28}
+                  color={currentColor === "dark" ? "white" : "black"}
                 />
-              </View>
-              <Text
-                style={{ fontSize: 12, fontWeight: "400", paddingVertical: 5 }}
-              >
-                {oneUser?.author.name}
-              </Text>
-            </NormalView>
+              </Pressable>
+            </SafeAreaView>
           ),
         }}
       />
       <NormalView style={{ display: "flex", height: "100%" }}>
         <ScrollView style={{ paddingHorizontal: 10, flex: 1 }}>
-          <NormalView>
-            <Text style={{ textAlign: "right", fontSize: 16 }}>Hello</Text>
+          <NormalView
+            style={{
+              paddingVertical: 5,
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Text style={{ flex: 1 }}></Text>
+            <NormalView
+              style={{
+                backgroundColor: "#222",
+                padding: 10,
+                borderRadius: 999,
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "right",
+                  fontSize: 16,
+                }}
+              >
+                Hello
+              </Text>
+            </NormalView>
           </NormalView>
-          <NormalView>
-            <Text style={{ textAlign: "left", fontSize: 16 }}>
-              How Are you?
-            </Text>
+          <NormalView
+            style={{
+              paddingVertical: 5,
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <NormalView
+              style={{
+                backgroundColor: "#0091ff",
+                padding: 10,
+                borderRadius: 999,
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "left",
+                  fontSize: 16,
+                }}
+              >
+                How Are you?
+              </Text>
+            </NormalView>
+            <Text style={{ flex: 1 }}></Text>
           </NormalView>
         </ScrollView>
         <NormalView
           style={{
-            height: 40,
-            paddingHorizontal: 10,
+            height: 60,
+            padding: 10,
             marginBottom: 20,
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
+            // backgroundColor: "white",
           }}
         >
           <TextInput
             style={{
-              borderWidth: 0.5,
+              height: "100%",
+              borderWidth: 1,
               borderColor: "#999",
               borderRadius: 999,
               paddingHorizontal: 10,
@@ -87,21 +167,21 @@ const ChatPage = () => {
             placeholder="Message . . ."
             placeholderTextColor="gray"
           />
+
           <Pressable
             style={{
-              backgroundColor: currentColor === "dark" ? "white" : "black",
-              height: 38,
-              width: 38,
+              // backgroundColor: currentColor === "dark" ? "white" : "black",
+              height: "100%",
               borderRadius: 999,
-              marginLeft: 5,
+              marginLeft: 10,
               justifyContent: "center",
               alignItems: "center",
             }}
           >
             <FontAwesome
               name="send"
-              size={20}
-              color={currentColor === "dark" ? "black" : "white"}
+              size={24}
+              color={currentColor === "dark" ? "white" : "black"}
             />
           </Pressable>
         </NormalView>
