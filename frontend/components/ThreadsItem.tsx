@@ -8,8 +8,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { useState, useCallback, useMemo, useRef, Ref } from "react";
-import BottomSheet from "@gorhom/bottom-sheet";
+import { useState } from "react";
 
 const blurhash = "LDEo[I_300IU00-;~q%MM{WB%MIU";
 
@@ -26,7 +25,11 @@ const ThreadsItem = (thread: Thread): JSX.Element => {
           verfied={thread.author.verified}
         />
         <MainContent content={thread.content} image={thread.image} />
-        <BottomIcons likedIcon={likedIcon} setLikedIcon={setLikedIcon} />
+        <BottomIcons
+          likedIcon={likedIcon}
+          setLikedIcon={setLikedIcon}
+          setShowBottomSheet={thread.setShowBottomSheet}
+        />
         <PostFooter
           replies={thread.replies?.length || 0}
           likes={thread.likesCount}
@@ -134,9 +137,11 @@ function PostFooter({
 function BottomIcons({
   likedIcon,
   setLikedIcon,
+  setShowBottomSheet,
 }: {
   likedIcon: boolean;
   setLikedIcon: (likedIcon: boolean) => void;
+  setShowBottomSheet: (props: boolean) => void;
 }) {
   const iconSize = 24;
   const currentTheme = useColorScheme();
@@ -151,7 +156,7 @@ function BottomIcons({
           color={iconColor}
         />
       </Pressable>
-      <Pressable>
+      <Pressable onPress={() => setShowBottomSheet(true)}>
         <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor} />
       </Pressable>
       <AntDesign name="retweet" size={iconSize} color={iconColor} />

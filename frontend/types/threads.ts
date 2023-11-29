@@ -9,6 +9,7 @@ export interface Thread {
   mentionUser?: User;
   createdAt: string;
   whoLiked?: User[];
+  setShowBottomSheet: (props: boolean) => void;
 }
 
 export interface Reply {
