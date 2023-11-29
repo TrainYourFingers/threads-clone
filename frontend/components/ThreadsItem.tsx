@@ -8,12 +8,14 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { useState } from "react";
+import { useState, useCallback, useMemo, useRef, Ref } from "react";
+import BottomSheet from "@gorhom/bottom-sheet";
 
 const blurhash = "LDEo[I_300IU00-;~q%MM{WB%MIU";
 
 const ThreadsItem = (thread: Thread): JSX.Element => {
   const [likedIcon, setLikedIcon] = useState<boolean>(false);
+
   return (
     <View style={styles.container}>
       <PostLeftSide {...thread} />
@@ -149,7 +151,9 @@ function BottomIcons({
           color={iconColor}
         />
       </Pressable>
-      <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor} />
+      <Pressable>
+        <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor} />
+      </Pressable>
       <AntDesign name="retweet" size={iconSize} color={iconColor} />
       <Feather name="send" size={iconSize} color={iconColor} />
     </View>
