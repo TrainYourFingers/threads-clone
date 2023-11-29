@@ -14,6 +14,8 @@ import { Image } from "expo-image";
 const Message = (user: Thread) => {
   const currentColor = useColorScheme();
   const pressedColor = currentColor === "dark" ? "#121212" : "#ddd";
+  const randomLength = Math.floor(Math.random() * 50) + 10;
+
   return (
     <Pressable
       key={user.id}
@@ -60,7 +62,7 @@ const Message = (user: Thread) => {
         </View>
         <View style={{ backgroundColor: "transparent" }}>
           <Text style={{ fontSize: 12, color: "gray" }}>
-            {user.content.slice(0, 50)}
+            {user.content.slice(0, randomLength)}
           </Text>
         </View>
       </NormalView>
