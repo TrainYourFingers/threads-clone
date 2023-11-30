@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ScrollView } from "react-native";
+import { Dimensions, ScrollView } from "react-native";
 import Lottie from "lottie-react-native";
 import { FlatList, RefreshControl } from "react-native-gesture-handler";
 import { useCallback, useRef, useState } from "react";
@@ -15,13 +15,15 @@ export default function TabOneScreen() {
   const [showBottomSheet, setShowBottomSheet] = useState<Boolean>(false);
   const [showLogo, setShowLogo] = useState<Boolean>(true);
 
+  const deviceHeight = Math.floor(Dimensions.get("window").height);
+
   const threads = useContext(ThreadsContext);
   const { setReload } = useContext(ReloadContext);
 
   return (
     <SafeAreaView>
       <CustomBottomSheet
-        height={600}
+        height={deviceHeight / 1.25}
         showBottomSheet={showBottomSheet}
         setShowBottomSheet={setShowBottomSheet}
       >

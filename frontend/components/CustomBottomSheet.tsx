@@ -81,8 +81,8 @@ export default function CustomBottomSheet({
           },
           draggableIcon: {
             backgroundColor: "#bbb",
-            width: 80,
-            height: 10,
+            width: 100,
+            height: 8,
           },
           container: {
             borderTopLeftRadius: 30,
