@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Dimensions, ScrollView } from "react-native";
+import { Animated, Dimensions, ScrollView } from "react-native";
 import Lottie from "lottie-react-native";
 import { FlatList, RefreshControl } from "react-native-gesture-handler";
 import { useCallback, useRef, useState } from "react";
@@ -8,10 +8,11 @@ import { useContext } from "react";
 import ThreadsItem from "../../components/ThreadsItem";
 import CustomBottomSheet from "../../components/CustomBottomSheet";
 import Notification from "../../components/Notification";
-import { Text } from "../../components/Themed";
+import { Text, View } from "../../components/Themed";
 
 export default function TabOneScreen() {
   const animationRef = useRef<Lottie>(null);
+
   const [showBottomSheet, setShowBottomSheet] = useState<Boolean>(false);
   const [showLogo, setShowLogo] = useState<Boolean>(true);
 
@@ -21,7 +22,7 @@ export default function TabOneScreen() {
   const { setReload } = useContext(ReloadContext);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ paddingBottom: 10 }}>
       <CustomBottomSheet
         height={deviceHeight / 1.25}
         showBottomSheet={showBottomSheet}
@@ -34,6 +35,7 @@ export default function TabOneScreen() {
           <Notification />
         </ScrollView>
       </CustomBottomSheet>
+
       {showLogo && (
         <Lottie
           ref={animationRef}
@@ -41,8 +43,8 @@ export default function TabOneScreen() {
           loop={false}
           autoPlay
           style={{
-            width: 110,
-            height: 110,
+            width: 100,
+            height: 100,
             alignSelf: "center",
           }}
         />
@@ -55,7 +57,6 @@ export default function TabOneScreen() {
         )}
         style={{
           paddingHorizontal: 10,
-          paddingTop: 10,
           zIndex: -50,
         }}
         refreshControl={
@@ -69,7 +70,9 @@ export default function TabOneScreen() {
             tintColor={"transparent"}
           />
         }
-        onScrollBeginDrag={() => setShowLogo(false)}
+        onScrollBeginDrag={() => {
+          setShowLogo(false);
+        }}
       />
     </SafeAreaView>
   );

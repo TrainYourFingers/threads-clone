@@ -119,6 +119,7 @@ const ChatPage = () => {
                 style={{
                   textAlign: "right",
                   fontSize: 16,
+                  color: "white",
                 }}
               >
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
@@ -135,7 +136,7 @@ const ChatPage = () => {
           >
             <NormalView
               style={{
-                backgroundColor: "#222",
+                backgroundColor: currentColor === "dark" ? "#222" : "#ddd",
                 padding: 10,
                 borderRadius: 20,
                 maxWidth: 350,
